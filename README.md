@@ -1,0 +1,2 @@
+# MeteleOnda
+Metele onda es una aplicación que permite a los usuarios calificar la calidad de la atención en distintos establecimientos (negocios, restaurantes, hoteles, ministerios o dependencias del gobierno, etc.) del país. La idea es que cada usuario pueda asignar una puntuación al establecimiento y dejar comentarios acerca de establecimientos en dónde ha sido o bien o mal tratado por el personal.
