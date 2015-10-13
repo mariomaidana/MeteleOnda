@@ -1,24 +1,49 @@
 #serializers.py
-from models import Rubro, Provincia, Usuario
-from rest_framework.serializers import ModelSerializer
+from models import Rubro, Provincia, Usuario, Calificacion, Establecimiento, Ciudad
+# Importar HyperlinkedModelSerializer para mostrar las urls en los modelos... personas, curso.
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 
-#--//**Serializador USUARIO**//----------#
-class UsuarioSerializer(ModelSerializer):
+
+#--//**Serializador RUBRO**//----------#
+class RubroSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Usuario
+		models = Rubro
 #--//  fin Serializador  //----------#
 
 
 #--//**Serializador PROVINCIA**//----------#
-class ProvinciaSerializer(ModelSerializer):
+class ProvinciaSerializer(HyperlinkedModelSerializer):
 	class Meta:
 		models = Provincia 
 #--//  fin Serializador  //----------#
 
 
-#--//**Serializador RUBRO**//----------#
-class RubroSerializer(ModelSerializer):
+#--//**Serializador CIUDAD**//----------#
+class CiudadSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Rubro
+		models = Ciudad
 #--//  fin Serializador  //----------#
+
+
+#--//**Serializador USUARIO**//----------#
+class UsuarioSerializer(HyperlinkedModelSerializer):
+	class Meta:
+		models = Usuario
+#--//  fin Serializador  //----------#
+
+#--//**Serializador CALIFICACION**//----------#
+class CalificacionSerializer(HyperlinkedModelSerializer):
+	class Meta:
+		models = Calificacion
+#--//  fin Serializador  //----------#
+
+
+
+#--//**Serializador ESTABLECIMIENTO**//----------#
+class EstablecimientoSerializer(HyperlinkedModelSerializer):
+	class Meta:
+		models = Establecimiento
+#--//  fin Serializador  //----------#
+
+
