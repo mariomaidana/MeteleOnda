@@ -16,9 +16,9 @@ class Rubro(models.Model):
 ##----// **Clase USUARIO**  //-----------------------##
 class Usuario(models.Model):
 	#----------// ATRIBUTOS  //--------#
-	fb_id     = models.CharField(max_length = 200)
-	tw_id     = models.CharField(max_length = 200)
-	google_id = models.CharField(max_length = 200)
+	fb_id     = models.CharField(null=True, max_length = 200)
+	tw_id     = models.CharField(null=True, max_length = 200)
+	google_id = models.CharField(null=True, max_length = 200)
 
 	def __unicode__(self):
 		return self.name
@@ -42,7 +42,7 @@ class Ciudad(models.Model):
 	codigo_postal = models.CharField(max_length = 10)
 	#--relacion muchos a uno con la clase Provincia--#
 	#FK
-	provincia = models.Foreignkey(Provincia)
+	provincia = models.Foreignkey(Provincia, related_name='ciudades')
 
 	def __unicode__(self):
 		return self.name
@@ -59,13 +59,13 @@ class Establecimiento(models.Model):
 
 	#--relacion muchos a uno con la clase Establecimiento--#
 	#FK
-	ciudad = models.Foreignkey(Ciudad)
+	ciudad = models.Foreignkey(Ciudad, related_name='establecimientos')
 	#--relacion muchos a uno con la clase Rubro--#
 	#FK
-	rubro = models.Foreignkey(Rubro)
+	rubro = models.Foreignkey(Rubro, related_name='establecimientos')
 	#--relacion muchos a uno con la clase Calificacion--#
 	#FK 
-	calificaciones = models.Foreignkey(Calificacion)           #<<<<CONSULTAR relacion
+	#calificaciones = models.Foreignkey(Calificacion)           #<<<<CONSULTAR relacion
 	#Consulta 
 	
 	def __unicode__(self):
@@ -79,8 +79,8 @@ class Calificacion(models.Model):
 	comentario = models.TextField()
 
 	# Consultar estas relaciones relacion!!!!! 
-	usuario    = models.OneToOneField(Usuario)               #<<<<CONSULTAR relacion
-	establecimiento= models.OneToOneField(Establecimiento)   #<<<<CONSULTAR relacion
+	usuario = models.Foreignkey(Usuario, related_name='calificaciones')
+	establecimiento= models.Foreignkey(Establecimiento, related_name='calificaciones')   #<<<<CONSULTAR relacion
 	#--------------// //---------------------#
 	def __unicode__(self):
 		return self.comentario
