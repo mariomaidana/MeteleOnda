@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from mi_app.views import RubroViewSet, UsuarioViewSet, ProvinciaViewSet, CiudadViewSet, EstablecimientoViewSet, CalificacionViewSet
+from rest_framework.routers import SimpleRouter
+from rest_framework.authtoken import views
+
+router = SimpleRouter()
+router.register(r'rubros',RubroViewSet)
+router.register(r'usuarios',UsuarioViewSet)
+router.register(r'provincias',ProvinciaViewSet)
+router.register(r'ciudades',CiudadViewSet)
+router.register(r'establecimientos',EstablecimientoViewSet)
+router.register(r'calificaciones',CalificacionViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^',include(router.urls)),
+    url(r'^api-token-auth/', views.obtain_auth_token)
 ]

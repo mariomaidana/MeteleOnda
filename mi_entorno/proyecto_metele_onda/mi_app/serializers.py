@@ -1,40 +1,40 @@
 #serializers.py
-from models import Rubro, Provincia, Usuario
-from rest_framework.serializers import ModelSerializer
+from models import Rubro, Provincia, Usuario, Ciudad, Establecimiento, Calificacion
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 
 #--//**Serializador USUARIO**//----------#
-class UsuarioSerializer(ModelSerializer):
+class UsuarioSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Usuario
+		model = Usuario
 #--//  fin Serializador  //----------#
 
 #--//**Serializador PROVINCIA**//----------#
-class ProvinciaSerializer(ModelSerializer):
+class ProvinciaSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Provincia 
+		model = Provincia 
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
-class RubroSerializer(ModelSerializer):
+class RubroSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Rubro
+		model = Rubro
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
-class CiudadSerializer(ModelSerializer):
+class CiudadSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Ciudad
+		model = Ciudad
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
-class EstablecimientoSerializer(ModelSerializer):
+class EstablecimientoSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Establecimiento
+		model = Establecimiento
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
-class CalificacionSerializer(ModelSerializer):
+class CalificacionSerializer(HyperlinkedModelSerializer):
 	class Meta:
-		models = Calificacion
+		model = Calificacion
 #--//  fin Serializador  //----------#

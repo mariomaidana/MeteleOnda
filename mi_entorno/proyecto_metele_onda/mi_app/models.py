@@ -9,7 +9,7 @@ class Rubro(models.Model):
 	nombre = models.CharField(max_length = 200)
 
 	def __unicode__(self):
-		return self.name
+		return self.nombre
 ##----// **fin class**  //-----------------------##
 
 
@@ -21,7 +21,7 @@ class Usuario(models.Model):
 	google_id = models.CharField(null=True, max_length = 200)
 
 	def __unicode__(self):
-		return self.name
+		return self.google_id
 ##----// **fin class**  //-----------------------##
 
 
@@ -31,7 +31,7 @@ class Provincia(models.Model):
 	nombre = models.CharField(max_length = 200)
 
 	def __unicode__(self):
-		return self.name
+		return self.nombre
 ##----// **fin class**  //-----------------------##
 
 
@@ -42,10 +42,10 @@ class Ciudad(models.Model):
 	codigo_postal = models.CharField(max_length = 10)
 	#--relacion muchos a uno con la clase Provincia--#
 	#FK
-	provincia = models.Foreignkey(Provincia, related_name='ciudades')
+	provincia = models.ForeignKey(Provincia, related_name='ciudades')
 
 	def __unicode__(self):
-		return self.name
+		return self.nombre
 ##----// **fin class**  //-----------------------##
 
 
@@ -59,31 +59,31 @@ class Establecimiento(models.Model):
 
 	#--relacion muchos a uno con la clase Establecimiento--#
 	#FK
-	ciudad = models.Foreignkey(Ciudad, related_name='establecimientos')
+	ciudad = models.ForeignKey(Ciudad, related_name='establecimientos')
 	#--relacion muchos a uno con la clase Rubro--#
 	#FK
-	rubro = models.Foreignkey(Rubro, related_name='establecimientos')
+	rubro = models.ForeignKey(Rubro, related_name='establecimientos')
 	#--relacion muchos a uno con la clase Calificacion--#
 	#FK 
 	#calificaciones = models.Foreignkey(Calificacion)           #<<<<CONSULTAR relacion
 	#Consulta 
 	
 	def __unicode__(self):
-		return self.name
+		return self.nombre
 ##----// **fin class**  //-----------------------##
 
 ##----// **Clase CALIFICACION**  //-----------------------##
 class Calificacion(models.Model):
 	#----------// ATRIBUTOS  //--------#
-	puntaje    = models-IntegerField()
+	puntaje    = models.IntegerField()
 	comentario = models.TextField()
 
 	# Consultar estas relaciones relacion!!!!! 
-	usuario = models.Foreignkey(Usuario, related_name='calificaciones')
-	establecimiento= models.Foreignkey(Establecimiento, related_name='calificaciones')   #<<<<CONSULTAR relacion
+	usuario = models.ForeignKey(Usuario, related_name='calificaciones')
+	establecimiento= models.ForeignKey(Establecimiento, related_name='calificaciones')   #<<<<CONSULTAR relacion
 	#--------------// //---------------------#
 	def __unicode__(self):
-		return self.comentario
+		return self.usuario
 ##----// **fin class**  //-----------------------##
 
 
