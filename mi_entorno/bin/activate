@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/marioub/lab-2015/tp_final/MeteleOnda/mi_entorno"
+VIRTUAL_ENV="/home/marioub/lab-2015/MeteleOnda/mi_entorno"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
