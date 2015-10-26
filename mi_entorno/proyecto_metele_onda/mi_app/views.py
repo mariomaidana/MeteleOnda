@@ -5,6 +5,8 @@ from rest_framework.decorators import detail_route
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.http import *
+#import para la class -index
+from django.views.generic import TemplateView # -index
 from django.shortcuts import render_to_response,redirect, render
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -35,3 +37,9 @@ class EstablecimientoViewSet(ModelViewSet):
 class CalificacionViewSet(ModelViewSet):
 	queryset	 = 	Calificacion.objects.all()
 	serializer_class =	CalificacionSerializer
+
+#---//  Vista para el index  //---------##
+#class index----------------------------##
+class Index(TemplateView):
+	template_name = 'mi_app/base.html'
+#---------------------------------------##
