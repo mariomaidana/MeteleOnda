@@ -41,5 +41,5 @@ class CalificacionViewSet(ModelViewSet):
 #---//  Vista para el index  //---------##
 #class index----------------------------##
 class Index(TemplateView):
-	template_name = 'mi_app/base.html'
+	template_name = 'mi_app/base2.html'
 #---------------------------------------##
