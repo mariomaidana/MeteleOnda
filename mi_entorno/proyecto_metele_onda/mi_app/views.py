@@ -43,3 +43,17 @@ class CalificacionViewSet(ModelViewSet):
 class Index(TemplateView):
 	template_name = 'mi_app/base2.html'
 #---------------------------------------##
+
+
+
+
+
+
+
+
+
+
+#class calificar----------------------------##
+class Calificar(TemplateView):
+	template_name = 'mi_app/calificar.html'
+#---------------------------------------##

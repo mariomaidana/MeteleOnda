@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mi_app.views import Index, RubroViewSet, UsuarioViewSet, ProvinciaViewSet, CiudadViewSet, EstablecimientoViewSet, CalificacionViewSet
+from mi_app.views import Calificar, Index, RubroViewSet, UsuarioViewSet, ProvinciaViewSet, CiudadViewSet, EstablecimientoViewSet, CalificacionViewSet
 from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 
@@ -34,4 +34,6 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     #url para el index
     url(r'^index/', Index.as_view(), name='index'),
+    #url para la vista calificar
+    url(r'^calificar/', Calificar.as_view(), name='calificar'),
 ]
