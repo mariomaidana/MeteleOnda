@@ -25,6 +25,13 @@
         </div>
         <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
         <div id="navbar">
+           <form action="#Buscar" class="navbar-form navbar-left" role="search">
+              <div class="form-group ">
+                <input type="text" class="form-control" placeholder="Establecimiento Direccion">
+              </div>
+              <button type="submit" class="btn btn-default">Buscar</button>
+          </form>
+
           <ul class="nav navbar-nav">
             <li class="active"><a href="#inicio">Inicio</a></li>
             <li><a href="#about">Los 10 Mejores</a></li>
@@ -42,12 +49,7 @@
               </ul>
             </li>-->
           </ul>
-          <form action="#Buscar" class="navbar-form navbar-left" role="search">
-              <div class="form-group ">
-                <input type="text" class="form-control" placeholder="Establecimiento Direccion">
-              </div>
-              <button type="submit" class="btn btn-default">Buscar</button>
-          </form>
+         
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#l1">Link</a></li>
             <li><a href="#l2">Link</a></li>
@@ -74,6 +76,7 @@
     <script src="{% static 'mi_app/jquery/jquery-1.11.3.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'mi_app/bootstrap3/js/bootstrap.min.js' %}"></script>
-
+    {% block js%}
+    {%endblock%}
   </body>
 </html>

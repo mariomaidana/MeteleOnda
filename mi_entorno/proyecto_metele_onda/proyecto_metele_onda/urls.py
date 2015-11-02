@@ -32,8 +32,11 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^',include(router.urls)),
     url(r'^api-token-auth/', views.obtain_auth_token),
+
+    #----//       //----------------------#
     #url para el index
     url(r'^index/', Index.as_view(), name='index'),
     #url para la vista calificar
     url(r'^calificar/', Calificar.as_view(), name='calificar'),
+    #----//       //----------------------#
 ]
