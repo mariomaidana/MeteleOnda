@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="lu., 02 nov. 2015 03:46:02 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    
+  <title></title>
+    
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+	
+		function loadEstablecimientos(){
+	
+		var xmlhttp;
+		var txt,x,xx,i;
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange=function(){
+	
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				var resp =  JSON.parse(xmlhttp.responseText);
+				var out = "<table border='1px solid blacḱ'>";
+				out += "<tr><th></th><th></th><th>Nombre</th><th>Url</th></tr>"
+				for(i = 0; i < resp.length; i++) {
+	
+					out += "<tr><td>" +
+					"<a href='#'>Eliminar</a>" +
+					"</td><td>" +
+					"<a href='#'>Modificar</a>" +
+					"</td><td>" +
+					resp[i].name +
+					"</td><td>" +
+					resp[i].url +
+					"</td></tr>";
+				}
+				out += "</table>";
+				console.log(out);
+				document.getElementById("tabla").innerHTML = out;
+			}
+		}
+	
+		xmlhttp.open("GET", 'http://localhost:8000/cursos/?format=json', true);
+		xmlhttp.send();
+	}
+	
+	</script>
+    
+  <link href="main.css" rel="stylesheet" type="text/css">
+  
+  </head>
+  <body style="padding:10px; margin:0;">
+<div style="width:98%;">
+  <div style="height:50px; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; margin-bottom:10px;"" >
+  <input type="text" name="" value="">
+  <input type="button" value="Buscar Establecimiento" >
+  </br>
+  <input type="button" value="Crear Establecimiento" >
+  </div>
+  
+  <div style="height:500px; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; background-color: #CCC">
+  
+  <div style="height:100%; width:45%; float:left; padding: 10px 10px 10px 10px;">
+  	
+    <div style="height:100px; width:95%; border: solid; border-radius: 25px; float:left; margin-bottom:10px; padding:10px 10px 10px 10px; background-color:#999">
+    
+        <div style="width:80px; height:80px; border: solid; float:left; background-color:#FFF"> 
+        
+        </div>
+	
+        <div style="float:left; margin-left:20px;">
+             <span class="starRating">
+              <input id="rating5-1" type="radio" name="rating-1" value="5">
+              <label for="rating5-1">5</label>
+              <input id="rating4-1" type="radio" name="rating-1" value="4">
+              <label for="rating4-1">4</label>
+              <input id="rating3-1" type="radio" name="rating-1" value="3">
+              <label for="rating3-1">3</label>
+              <input id="rating2-1" type="radio" name="rating-1" value="2">
+              <label for="rating2-1">2</label>
+              <input id="rating1-1" type="radio" name="rating-1" value="1">
+              <label for="rating1-1">1</label>
+            </span>
+           	<label style="display: block; font-size:11px; margin-bottom:10px;" id='cantCalifEstablecimiento'>2 Calificaciones</label>
+            <label style="display: block;" id='nombreEstablecimiento'>Nombre</label>
+           	<label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
+        </div>
+        
+        <div style="width:100px; height:80px; float:right; padding-top:20px;"> 
+            <input name="btnCalificar-1" style="width:100px; margin-bottom:20px;" type="button" value="Calificar">      
+            <input name="btnDetalle-1" style="width:100px;" type="button" value="Detalle">
+        </div>
+	</div>
+    
+    <div style="height:100px; width:95%; border: solid; border-radius: 25px; float:left; margin-bottom:10px; padding:10px 10px 10px 10px; background-color:#999">
+    
+        <div style="width:80px; height:80px; border: solid;  float:left; background-color:#FFF"> 
+        
+        </div>
+	
+        <div style="float:left; margin-left:20px;">
+             <span class="starRating">
+              <input id="rating5-2" type="radio" name="rating-2" value="5">
+              <label for="rating5-2">5</label>
+              <input id="rating4-2" type="radio" name="rating-2" value="4">
+              <label for="rating4-2">4</label>
+              <input id="rating3-2" type="radio" name="rating-2" value="3">
+              <label for="rating3-2">3</label>
+              <input id="rating2-2" type="radio" name="rating-2" value="2">
+              <label for="rating2-2">2</label>
+              <input id="rating1-2" type="radio" name="rating-2" value="1">
+              <label for="rating1-2">1</label>
+            </span>
+           	<label style="display: block; font-size:11px; margin-bottom:10px;" id='cantCalifEstablecimiento'>2 Calificaciones</label>
+            <label style="display: block;" id='nombreEstablecimiento'>Nombre</label>
+           	<label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
+        </div>
+        
+        <div style="width:100px; height:80px; float:right; padding-top:20px;"> 
+            <input name="btnCalificar-2" style="width:100px; margin-bottom:20px;" type="button" value="Calificar">      
+            <input name="btnDetalle-2" style="width:100px;" type="button" value="Detalle">
+        </div>
+	</div>
+    
+        <div style="height:100px; width:95%; border: solid; border-radius: 25px; float:left; margin-bottom:10px; padding:10px 10px 10px 10px; background-color:#999">
+    
+        <div style="width:80px; height:80px; border: solid;  float:left; background-color:#FFF"> 
+        
+        </div>
+	
+        <div style="float:left; margin-left:20px;">
+             <span class="starRating">
+              <input id="rating5-3" type="radio" name="rating-3" value="5">
+              <label for="rating5-3">5</label>
+              <input id="rating4-3" type="radio" name="rating-3" value="4">
+              <label for="rating4-3">4</label>
+              <input id="rating3-3" type="radio" name="rating-3" value="3">
+              <label for="rating3-3">3</label>
+              <input id="rating2-3" type="radio" name="rating-3" value="2">
+              <label for="rating2-3">2</label>
+              <input id="rating1-3" type="radio" name="rating-3" value="1">
+              <label for="rating1-3">1</label>
+            </span>
+           	<label style="display: block; font-size:11px; margin-bottom:10px;" id='cantCalifEstablecimiento'>2 Calificaciones</label>
+            <label style="display: block;" id='nombreEstablecimiento'>Nombre</label>
+           	<label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
+        </div>
+        
+        <div style="width:100px; height:80px; float:right; padding-top:20px;"> 
+            <input name="btnCalificar-3" style="width:100px; margin-bottom:20px;" type="button" value="Calificar">      
+            <input name="btnDetalle-3" style="width:100px;" type="button" value="Detalle">
+        </div>
+	</div>
+  </div>
+  
+  <div style="height:100%; width:45%; border: solid; border-radius: 25px; float:right; background-color:#FFF">
+
+  </div>
+  
+  </div>
+</div>
+  </body>
+</html>
