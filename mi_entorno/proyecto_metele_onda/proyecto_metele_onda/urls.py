@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mi_app.views import Calificar, Index, RubroViewSet, UsuarioViewSet, ProvinciaViewSet, CiudadViewSet, EstablecimientoViewSet, CalificacionViewSet
+from mi_app.views import AltaEstablecimiento, Calificar, Index, RubroViewSet, UsuarioViewSet, ProvinciaViewSet, CiudadViewSet, EstablecimientoViewSet, CalificacionViewSet
 from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 
@@ -38,5 +38,8 @@ urlpatterns = [
     url(r'^index/', Index.as_view(), name='index'),
     #url para la vista calificar
     url(r'^calificar/', Calificar.as_view(), name='calificar'),
+    #----//       //----------------------#
+    #url para ... crear establecimiento
+    url(r'^alta/', AltaEstablecimiento.as_view(), name='altaEstablecimiento'),
     #----//       //----------------------#
 ]

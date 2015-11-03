@@ -1,61 +1,54 @@
     {% extends "mi_app/base.html" %}
 
+     {% block titulo %} Calificar{% endblock %}
+
+    {% block header %} {% endblock %}
+
     {% block content %}
-    	<div>
-    		<h1>jv.</h1>
-    	</div>
+    	
+    	<form class="form-horizontal" method="POST" action="#calificar">{% csrf_token %}
+        <fieldset>
 
-    	<form class="form-horizontal">
-<fieldset>
+        <!-- Form Name -->
+        <legend>Calificar el establecimieto</legend>
 
-<!-- Form Name -->
-<legend>Calificar el establecimieto</legend>
+        <!-- Multiple Radios (inline) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="radios">califiacar</label>
+          <div class="col-md-4"> 
+            <!-- estrelllas -->
+            <div class="ec-stars-wrapper">
+              <a href="#1" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+              <a href="#2" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+              <a href="#3" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+              <a href="#4" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+              <a href="#5" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+            </div>
+            <noscript>Necesitas tener habilitado javascript para poder votar</noscript>
+              <!-- fin estrelllas -->
+          </div>
+          
+        </div>
 
-<!-- Multiple Radios (inline) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="radios">puntos</label>
-  <div class="col-md-4"> 
-    <label class="radio-inline" for="radios-0">
-      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
-      1
-    </label> 
-    <label class="radio-inline" for="radios-1">
-      <input type="radio" name="radios" id="radios-1" value="2">
-      2
-    </label> 
-    <label class="radio-inline" for="radios-2">
-      <input type="radio" name="radios" id="radios-2" value="3">
-      3
-    </label> 
-    <label class="radio-inline" for="radios-3">
-      <input type="radio" name="radios" id="radios-3" value="4">
-      4
-    </label> 
-    <label class="radio-inline" for="radios-4">
-      <input type="radio" name="radios" id="radios-4" value="5">
-      5
-    </label>
-  </div>
-</div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textarea">Text Area</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="textarea" name="textarea">Ingresar un comentario</textarea>
-  </div>
-</div>
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textarea">Comentario</label>
+          <div class="col-md-4">                     
+            <textarea class="form-control" id="textarea" name="textarea" ></textarea>
+          </div>
+        </div>
 
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-primary">Aceptar</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Cancelar</button>
-  </div>
-</div>
+        <!-- Button (Double) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="button1id"></label>
+          <div class="col-md-8">
+            <button id="button1id" name="button1id" class="btn btn-primary">Aceptar</button>
+            <a href="/index" class="btn btn-danger" role="button">Cancelar</a>
+          </div>
+        </div>
 
-</fieldset>
-</form>
+        </fieldset>
+      </form>
 
     {% endblock content %}

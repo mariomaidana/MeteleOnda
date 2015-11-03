@@ -60,3 +60,9 @@ class Index(TemplateView):
 class Calificar(TemplateView):
 	template_name = 'mi_app/calificar.html'
 #---------------------------------------##
+
+
+#class altaEstablecimiento----------------------------##
+class AltaEstablecimiento(TemplateView):
+	template_name = 'mi_app/altaEstablecimiento.html'
+#---------------------------------------##
