@@ -19,18 +19,29 @@ class ProvinciaSerializer(HyperlinkedModelSerializer):
 class RubroSerializer(HyperlinkedModelSerializer):
 	class Meta:
 		model = Rubro
+		fields 	= ('id', 
+		'nombre')
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
 class CiudadSerializer(HyperlinkedModelSerializer):
 	class Meta:
 		model = Ciudad
+		fields 	= ('id', 
+				'nombre')
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
 class EstablecimientoSerializer(HyperlinkedModelSerializer):
 	class Meta:
 		model = Establecimiento
+		fields 	= ('id', 
+			'nombre', 
+			'direccion', 
+			'ciudad', 
+			'rubro', 
+			'latitud',
+			'longitud')
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
