@@ -36,13 +36,13 @@ class EstablecimientoViewSet(ModelViewSet):
 	queryset	 = 	Establecimiento.objects.all()
 	serializer_class =	EstablecimientoSerializer
 
-	def get (self, request, format=None):
+	def list (self, request, format=None):
 		print "hola"
 
 		establecmientos = Establecimiento.objects.all()
 
 		results = [ob.as_json() for ob in establecmientos]
-		return HttpResponse(json.dumps(results), mimetype="application/json")
+		return HttpResponse(json.dumps(results))
 	# def post(self, request):	
 	# 	print request.data
 		#serializer = EstablecimientoSerializer(data=request.data)

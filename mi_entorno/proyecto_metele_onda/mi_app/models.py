@@ -8,6 +8,10 @@ class Rubro(models.Model):
 	#----------// ATRIBUTOS  //--------#
 	nombre = models.CharField(max_length = 200)
 
+	def as_json(self):
+	    return dict(
+	        id=self.id, nombre=self.nombre)
+
 	def __unicode__(self):
 		return self.nombre
 ##----// **fin class**  //-----------------------##
@@ -80,7 +84,7 @@ class Establecimiento(models.Model):
 	        latitud=self.latitud,
 	        longitud=self.longitud,
 	        ciudad=self.ciudad.as_json(),
-	        rubro=self.rubro)
+	        rubro=self.rubro.as_json())
 
 	def __unicode__(self):
 		return self.nombre
