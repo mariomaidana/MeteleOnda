@@ -2,6 +2,7 @@ from serializers import UsuarioSerializer, ProvinciaSerializer, RubroSerializer,
 from models import Rubro, Provincia, Usuario, Ciudad, Establecimiento, Calificacion
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import detail_route
+from rest_framework import generics
 
 from django.http import JsonResponse
 from django.http import HttpResponse
@@ -14,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.template import Context, loader
 import json
+from django.db.models import Q
 
 
 class RubroViewSet(ModelViewSet):
@@ -36,11 +38,23 @@ class EstablecimientoViewSet(ModelViewSet):
 	queryset	 = 	Establecimiento.objects.all()
 	serializer_class =	EstablecimientoSerializer
 
+	# def get_queryset(self):
+	# 	queryset = Establecimiento.objects.all()
+	# 	nombre = self.request.query_params.get('nombre', None)
+	# 	direccion = self.request.query_params.get('direccion', None)
+	# 	if nombre is not None:
+	# 		queryset = queryset.filter(Q(nombre__contains=nombre) | Q(direccion__contains=direccion))
+	# 	return queryset
+
 	def list (self, request, format=None):
-		print "hola"
-
 		establecmientos = Establecimiento.objects.all()
-
+		
+		nombre = self.request.query_params.get('nombre', None)
+		direccion = self.request.query_params.get('direccion', None)
+		
+		if nombre is not None:
+			establecmientos = establecmientos.filter(Q(nombre__contains=nombre) | Q(direccion__contains=direccion))
+		
 		results = [ob.as_json() for ob in establecmientos]
 		return HttpResponse(json.dumps(results))
 	# def post(self, request):	

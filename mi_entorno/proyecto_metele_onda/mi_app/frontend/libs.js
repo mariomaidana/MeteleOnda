@@ -126,12 +126,4 @@ function getCiudades(){
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			ciudades =  JSON.parse(xmlhttp.responseText);			
-		}
-		
-	}
-	xmlhttp.open("GET", 'http://localhost:8000/ciudades/?format=json', false);
-	xmlhttp.send();
-
-	return ciudades;
-}
+			ciudades =  JSON.parse(xmlhttp.r
