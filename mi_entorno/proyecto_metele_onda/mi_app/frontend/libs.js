@@ -16,9 +16,9 @@ function printTemplate(locacion, html){
 	document.getElementById(locacion).innerHTML = html;
 };
 
-function EstablecimientosView(){
+function EstablecimientosView(parametros){
 	
-	getObjetoModel("establecimientos", EstablecimientosTemplate);
+	getObjetoModel("establecimientos", parametros, EstablecimientosTemplate);
 };
 
 function EstablecimientosTemplate(establecimientos){
@@ -36,12 +36,13 @@ function EstablecimientosTemplate(establecimientos){
 		nombre 			= establecimiento.nombre;
 		
 		direccion 		= establecimiento.direccion;
-		/*
+		
 		direccion += ', ';
-		direccion += establecimiento.ciudad;
+
+		direccion += establecimiento.ciudad.nombre;
 
 		direccion += '.';
-		*/
+		
 		document.getElementById('content').innerHTML += html;
 		document.getElementById('panel').id = establecimiento.id;
 		
@@ -93,11 +94,7 @@ function agregarEstablecimiento(establecimiento){
 
 	xmlhttp.setRequestHeader("Content-type" ,"application/json");
 
-	xmlhttp.send('{"nombre":"' + establecimiento.nombre +
-				 '", "direccion": "' + establecimiento.direccion + 
-				 '", "ciudad": "' + establecimiento.ciudad +
-				 '", "rubro": "' + establecimiento.rubro +
-				 '"}');
+	xmlhttp.send(JSON.stringify(establecimiento));
 }
 
 function getRubros(){
@@ -126,4 +123,12 @@ function getCiudades(){
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			ciudades =  JSON.parse(xmlhttp.r
+			ciudades =  JSON.parse(xmlhttp.responseText);			
+		}
+		
+	}
+	xmlhttp.open("GET", 'http://localhost:8000/ciudades/?format=json', false);
+	xmlhttp.send();
+
+	return ciudades;
+}
