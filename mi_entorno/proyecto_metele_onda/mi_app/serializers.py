@@ -1,6 +1,6 @@
 #serializers.py
 from models import Rubro, Provincia, Usuario, Ciudad, Establecimiento, Calificacion
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 
 
 #--//**Serializador USUARIO**//----------#
@@ -32,7 +32,9 @@ class CiudadSerializer(HyperlinkedModelSerializer):
 #--//  fin Serializador  //----------#
 
 #--//**Serializador RUBRO**//----------#
-class EstablecimientoSerializer(HyperlinkedModelSerializer):
+class EstablecimientoSerializer(ModelSerializer):
+
+
 	class Meta:
 		model = Establecimiento
 		fields 	= ('id', 
@@ -42,7 +44,13 @@ class EstablecimientoSerializer(HyperlinkedModelSerializer):
 			'rubro', 
 			'latitud',
 			'longitud')
+
+	
 #--//  fin Serializador  //----------#
+
+class EstablecimientoEmbededSerializer(EstablecimientoSerializer):
+	ciudad = CiudadSerializer()
+	rubro = RubroSerializer()
 
 #--//**Serializador RUBRO**//----------#
 class CalificacionSerializer(HyperlinkedModelSerializer):

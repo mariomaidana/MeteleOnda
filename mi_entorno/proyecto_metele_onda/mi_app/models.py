@@ -44,6 +44,11 @@ class Ciudad(models.Model):
 	#FK
 	provincia = models.ForeignKey(Provincia, related_name='ciudades')
 
+	def as_json(self):
+	    return dict(
+	        id=self.id, nombre=self.nombre,
+	        codigo_postal=self.codigo_postal)
+
 	def __unicode__(self):
 		return self.nombre
 ##----// **fin class**  //-----------------------##
@@ -68,6 +73,15 @@ class Establecimiento(models.Model):
 	#calificaciones = models.Foreignkey(Calificacion)           #<<<<CONSULTAR relacion
 	#Consulta 
 	
+	def as_json(self):
+	    return dict(
+	        id=self.id, nombre=self.nombre,
+	        direccion=self.direccion, 
+	        latitud=self.latitud,
+	        longitud=self.longitud,
+	        ciudad=self.ciudad.as_json(),
+	        rubro=self.rubro)
+
 	def __unicode__(self):
 		return self.nombre
 ##----// **fin class**  //-----------------------##
