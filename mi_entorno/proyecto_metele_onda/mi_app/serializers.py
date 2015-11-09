@@ -48,12 +48,14 @@ class EstablecimientoSerializer(ModelSerializer):
 	
 #--//  fin Serializador  //----------#
 
-class EstablecimientoEmbededSerializer(EstablecimientoSerializer):
-	ciudad = CiudadSerializer()
-	rubro = RubroSerializer()
-
 #--//**Serializador RUBRO**//----------#
-class CalificacionSerializer(HyperlinkedModelSerializer):
+class CalificacionSerializer(ModelSerializer):
 	class Meta:
 		model = Calificacion
+		fields 	= ('id', 
+			'puntaje', 
+			'usuario', 
+			'comentario',
+			'establecimiento')
+
 #--//  fin Serializador  //----------#

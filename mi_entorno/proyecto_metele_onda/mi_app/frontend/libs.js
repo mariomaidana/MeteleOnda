@@ -21,6 +21,12 @@ function EstablecimientosView(parametros){
 	getObjetoModel("establecimientos", parametros, EstablecimientosTemplate);
 };
 
+  	function OnClickBtnCalificar(idEstablecimiento){
+  			 document.getElementById('idEstablecimiento').innerHTML = idEstablecimiento;
+			 
+			 document.getElementById('btnAceptarCalificar').setAttribute('onclick', 'OnClickAceptarCalificar(' + idEstablecimiento + ')');
+  	}
+
 function EstablecimientosTemplate(establecimientos){
 	
 	var html, panel, nombre_elem, direccion_elem;
@@ -74,6 +80,17 @@ function EstablecimientosTemplate(establecimientos){
 
 		nombre_elem.textContent = nombre;
 		direccion_elem.textContent = direccion;
+		
+		var buttons = panel.getElementsByTagName('button');
+		
+		for (j = 0; j < buttons.length; j++) {
+		
+			if (buttons.item(j).id == 'btnCalificar'){
+			
+				buttons.item(j).setAttribute('onclick', 'OnClickBtnCalificar(' + establecimiento.id + ')');
+				
+			}
+		}
 	}
 		
 	document.getElementsByTagName('title')[0].text = "Metele Onda - Listado de establecimientos";
@@ -95,6 +112,33 @@ function agregarEstablecimiento(establecimiento){
 	xmlhttp.setRequestHeader("Content-type" ,"application/json");
 
 	xmlhttp.send(JSON.stringify(establecimiento));
+}
+
+function calificarEstablecimiento(idEstablecimiento, puntaje, comentario){
+	var xmlhttp;
+	var txt,x,xx,i;
+	
+	var calificacion = {};
+	
+	calificacion.puntaje = puntaje;
+	calificacion.comentario = comentario;
+	calificacion.establecimiento = idEstablecimiento;
+	calificacion.usuario = 1;
+	
+	xmlhttp=new XMLHttpRequest();
+	
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			alert(xmlhttp.responseText);
+		}
+		
+	}
+
+	xmlhttp.open("POST", 'http://localhost:8000/calificaciones/', true);
+
+	xmlhttp.setRequestHeader("Content-type" ,"application/json");
+
+	xmlhttp.send(JSON.stringify(calificacion));
 }
 
 function getRubros(){

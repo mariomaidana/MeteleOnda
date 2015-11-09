@@ -20,6 +20,7 @@ class Rubro(models.Model):
 ##----// **Clase USUARIO**  //-----------------------##
 class Usuario(models.Model):
 	#----------// ATRIBUTOS  //--------#
+	nombre    = models.CharField(max_length = 200, null=True)
 	fb_id     = models.CharField(null=True, max_length = 200)
 	tw_id     = models.CharField(null=True, max_length = 200)
 	google_id = models.CharField(null=True, max_length = 200)

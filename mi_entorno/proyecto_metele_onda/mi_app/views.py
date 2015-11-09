@@ -1,4 +1,4 @@
-from serializers import UsuarioSerializer, ProvinciaSerializer, RubroSerializer, CiudadSerializer, EstablecimientoSerializer, CalificacionSerializer, EstablecimientoEmbededSerializer
+from serializers import UsuarioSerializer, ProvinciaSerializer, RubroSerializer, CiudadSerializer, EstablecimientoSerializer, CalificacionSerializer
 from models import Rubro, Provincia, Usuario, Ciudad, Establecimiento, Calificacion
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import detail_route
@@ -75,32 +75,3 @@ class EstablecimientoViewSet(ModelViewSet):
 class CalificacionViewSet(ModelViewSet):
 	queryset	 = 	Calificacion.objects.all()
 	serializer_class =	CalificacionSerializer
-
-
-	template_name = 'mi_app/calificar.html'
-
-#---//  Vista para el index  //---------##
-#class index----------------------------##
-class Index(TemplateView):
-	template_name = 'mi_app/base2.html'
-#---------------------------------------##
-
-
-
-
-
-
-
-
-
-
-#class calificar----------------------------##
-class Calificar(TemplateView):
-	template_name = 'mi_app/calificar.html'
-#---------------------------------------##
-
-
-#class altaEstablecimiento----------------------------##
-class AltaEstablecimiento(TemplateView):
-	template_name = 'mi_app/altaEstablecimiento.html'
-#---------------------------------------##
