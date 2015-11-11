@@ -103,6 +103,13 @@ class Calificacion(models.Model):
 	#--------------// //---------------------#
 	def __unicode__(self):
 		return self.usuario
+
+	def as_json(self):
+	    return dict(
+	        id=self.id, puntaje=self.puntaje,
+	        comentario=self.comentario, 
+	        usuario=self.usuario.as_json(),
+	        establecimiento=self.establecimiento.as_json())
 ##----// **fin class**  //-----------------------##
 
 

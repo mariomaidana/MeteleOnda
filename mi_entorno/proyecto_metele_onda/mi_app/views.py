@@ -16,6 +16,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.template import Context, loader
 import json
 from django.db.models import Q
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.db.models import Count, Avg
 
 
 class RubroViewSet(ModelViewSet):
@@ -25,6 +28,9 @@ class RubroViewSet(ModelViewSet):
 class UsuarioViewSet(ModelViewSet):
 	queryset	 = 	Usuario.objects.all()
 	serializer_class =	UsuarioSerializer
+
+
+
 
 class ProvinciaViewSet(ModelViewSet):
 	queryset	 = 	Provincia.objects.all()
@@ -70,6 +76,20 @@ class EstablecimientoViewSet(ModelViewSet):
   #           serializer.save()
   #           return Response(serializer.data, status=status.HTTP_201_CREATED)
   #       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def getDiezMejores(request):
+
+	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('-average_rating')[:5] 
+
+	return HttpResponse(establecmientos)
+
+@api_view(['GET'])
+def getDiezPeores(request):
+
+	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('average_rating')[:5] 
+
+	return HttpResponse(establecmientos)
 
 
 class CalificacionViewSet(ModelViewSet):
