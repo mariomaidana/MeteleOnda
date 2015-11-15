@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="lu., 02 nov. 2015 03:46:02 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    
+  <title></title>
+    
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+  
+    function Main(){
+    
+      var parametros = [];
+
+      EstablecimientosView(parametros);
+    }
+
+    function OnClickBuscarEstablecimientos(){
+
+      var parametros = [];
+
+      var txtBuscar = document.getElementById('txtBuscar').value;
+
+      parametros.push('&nombre=' + txtBuscar);
+      parametros.push('&direccion=' + txtBuscar);
+
+      EstablecimientosView(parametros);
+    }
+  
+
+  
+  function OcultarPopUp(id){
+       document.getElementById(id).style.display = 'none';
+  }
+  
+  function OnClickBtnCrearEstablecimiento(){
+       window.location ='templates/establecimientoDetalle.html';
+  }
+  
+  function OnClickAceptarCalificar(idEstablecimiento){
+  
+    var comentario = document.getElementById('txtComentario').value;
+    calificarEstablecimiento(idEstablecimiento, 5, comentario);
+  }
+    
+  </script>
+    
+  <link href="main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript" src="libs.js"></script>
+  <script type="text/javascript" src="dao.js"></script>
+
+  </head>
+  <body style="padding:10px; margin:0;" onLoad="Main();">
+    <div style="width:98%;">
+      <div style="height:50px; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; margin-bottom:10px;" >
+        <input type="text" id="txtBuscar" value="">
+        <input type="button" value="Buscar Establecimiento" onClick="OnClickBuscarEstablecimientos();">
+        </br>
+        <input type="button" id="btnCrearEstablecimiento" value="Crear Establecimiento" OnClick="OnClickBtnCrearEstablecimiento();" >
+    </div>
+  
+      <div style="height:auto; overflow:auto; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; background-color: #CCC">
+  
+           <div id="content" style="height:100%; width:55%; float:left; padding: 10px 10px 10px 10px;">
+
+  
+         </div>
+  
+           <div style="height:500px; width:45%; border: solid; border-radius: 25px; float:right; background-color:#FFF">
+
+           </div>
+  
+      </div>
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Calificar Establecimiento</h4>
+        </div>
+        <div class="modal-body">
+          <p>This is a small modal.</p>
+      
+      <label id="idEstablecimiento">id</label> 
+
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" id="q156" name="quality[25]" value="1" /> 1
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio" id="q157" name="quality[25]" value="2" /> 2
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio" id="q158" name="quality[25]" value="3" /> 3
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio" id="q159" name="quality[25]" value="4" /> 4
+                </label> 
+                <label class="btn btn-default active">
+                    <input type="radio" id="q160" name="quality[25]" value="5" /> 5
+                </label>
+            </div>
+      
+      <textarea id="txtComentario" class="span6" rows="3" placeholder="What's up?" required></textarea>
+
+        </div>
+        <div class="modal-footer">
+      <button type="button" id="btnAceptarCalificar" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+  </body>
+</html>
