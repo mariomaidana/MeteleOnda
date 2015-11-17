@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Login con Facebook</title>
+<script src="../facebook.js"></script>
+<!-- Bootstrap -->
+    <link href="../../bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<script>
+window.onload = function(){
+/* Función que comprueba el estado del usuario, si el usuario ya está conectado será redireccionado 
+a la página de inicio index.html */
+FBLogin();
+}
+</script>
+
+</head>
+<body>
+<div >
+  <div  class="modal-dialog">
+    <div class="modal-content">
+      <div   class="modal-header" align="center">
+        <h3>Login con..</h3>
+        <button type="button" onclick="FBBtnLogin()">Facebook</button><br><br>
+        <button>+Google</button><br><br>
+        <button>Tweter </button>
+
+        <div id="status">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../jquery-1.11.3.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../bootstrap.min.js"></script>
+</body>
+</html>
