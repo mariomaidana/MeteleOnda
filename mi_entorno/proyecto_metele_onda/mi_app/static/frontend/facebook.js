@@ -19,42 +19,6 @@ window.fbAsyncInit = function() {
   });
 }
 
-//=================// Conexion DB //s================//
-function validarUsuario(usuario){
-	var xmlhttp;
-	var txt,x,xx,i;
-	xmlhttp=new XMLHttpRequest();
-	xmlhttp.onreadystatechange=function(){
-		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			console.log(xmlhttp);
-			alert(xmlhttp.responseText);
-			
-			
-		}
-		
-	}
-
-	xmlhttp.open("POST", 'http://localhost:8000/usuarios', true);
-
-	xmlhttp.setRequestHeader("Content-type" ,"application/json");
-
-	xmlhttp.send(JSON.stringify(usuario));
-}
-
-
-function datosUsuario(response){
-
-	var usuario = {};
-	usuario.nombre = response.name;
-	usuario.fb_id = response.id;
-	usuario.tw_id = response.id;
-	usuario.google_id = response.id;
-
-	
-	validarUsuario(usuario);
-}
-//=================// fin Conexion DB //================//
-
 //Redirecciones para después de iniciar sesión o salir de la aplicación
 var url_after_login = "http://localhost:8000/static/frontend/main.html";
 var url_after_logout = "http://localhost:8000/static/frontend/templates/login.html";
@@ -96,8 +60,6 @@ function FBBtnLogout(){
    FB.getLoginStatus(function(response) { 
    //Conectado
   if (response.status === 'connected') {
-  	/*consulto en la base di existe este usuario*/
-  	validarUsuario(response)
   	console.log(response);
 
 	window.location.href = url_after_login;
@@ -112,6 +74,46 @@ function FBBtnLogout(){
   }
  });
 }
+
+
+//=================// CONSULTA DB //s================//
+function validarUsuario(usuario){
+	var xmlhttp;
+	var txt,x,xx,i;
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			console.log(xmlhttp);
+			alert(xmlhttp.responseText);
+			
+			
+		}
+		
+	}
+
+	xmlhttp.open("POST", 'http://localhost:8000/verificaUsuario/', true);
+
+	xmlhttp.setRequestHeader("Content-type" ,"application/json");
+
+	xmlhttp.send(JSON.stringify(usuario));
+}
+
+
+function datosUsuario(response){
+
+	var usuario = {};
+	usuario.nombre = response.name;
+	usuario.fb_id = response.id;
+	usuario.tw_id = response.id;
+	usuario.google_id = response.id;
+
+	
+	validarUsuario(usuario);
+}
+
+//=================// fin CONSULTA DB //================//
+
+
 
 	/*Función para el resto de páginas a las cuales sólo los usuarios auténticados tendrán permisos 
 	para entrar, si el usuario no está autenticado, es enviado a la página de login (login.html) */
@@ -134,16 +136,18 @@ function getStateFromUser(){
 					https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=es_ES
 					*/
 					FB.api('/me', function(response) {
-					
-					// nombre del usuario
-					name = response.name;
-					// email del usuario
-					email = response.email;
-					// id del usuario
-					id = response.id;
-					
-					// Incluimos un mensaje y la imagen del usuario
-					status.innerHTML = name + " has iniciado sesión correctamente <img src='//graph.facebook.com/"+id+"/picture'>";
+
+						/*consulto en la base di existe este usuario*/
+  						datosUsuario(response)
+						// nombre del usuario
+						name = response.name;
+						// email del usuario
+						email = response.email;
+						// id del usuario
+						id = response.id;
+						
+						// Incluimos un mensaje y la imagen del usuario
+						status.innerHTML = name + " has iniciado sesión correctamente <img src='//graph.facebook.com/"+id+"/picture'>";
 					});
 			}
 			// De lo contrario lo enviamos a login.html

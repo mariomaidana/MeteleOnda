@@ -26,7 +26,7 @@ class Usuario(models.Model):
 	google_id = models.CharField(null=True, max_length = 200)
 
 	def __unicode__(self):
-		return self.google_id
+		return unicode(self.fb_id)
 ##----// **fin class**  //-----------------------##
 
 
