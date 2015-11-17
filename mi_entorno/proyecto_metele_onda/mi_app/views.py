@@ -55,12 +55,19 @@ def verificaUsuario(request, format=None):
     """
    
     serializer = UsuarioSerializer(data=request.data,context={'request': request})
-    if serializer.is_valid():
+    try:
+    	fb = Usuario.objects.get(fb_id = request.data['fb_id'])
+    	msj = {'status':'Usuario existe!'}
+    	return Response(msj)
+    except Exception, e:
+    	if serializer.is_valid():
 			serializer.save()
 
-			return Response(serializer.data)
+			msj = {'status':'Usuario creado!'}
 
-    return Response({'received data': request.data})		
+			return Response(msj)
+    
+    #return Response({'received data': request.data})		
       
         
         
