@@ -20,8 +20,18 @@ function OnClick_btnGuardar(){
   establecimiento.longitud = 1;
 
   agregarEstablecimiento(establecimiento);
+  clikCancelar()
 }
 
+// retornar al main.html
+var to_back = "http://localhost:8000/static/frontend/main.html";
+
+function clikCancelar(){
+
+  window.location.href = to_back;
+
+}
+//------------------------------#
 function onLoad(){
 
   fillComboRubros();
@@ -48,6 +58,7 @@ function onLoad(){
               
               <label style="display: block;" id='ciudadEstablecimiento'>Ciudad</label>
               <select id='cmbCiudad'></select>
+              <!--<input style="display: block;" type="text" id='cmbCiudad' />-->
               
               <label style="display: block;" id='rubroEstablecimiento'>Rubro</label>
               <select  id='cmbRubro'></select>
@@ -59,7 +70,7 @@ function onLoad(){
                 <button id="btnGuardar" onClick="OnClick_btnGuardar();" style="width:100px;" >Guardar</button>
                 </td>
                 <td>
-                <button id='btnVolver' style="width:100px;">Cancelar</button>
+                <button id='btnVolver' style="width:100px;"  onclick="clikCancelar()">Cancelar</button>
                 </td>
               </tr>
             </table>

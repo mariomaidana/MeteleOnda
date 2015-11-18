@@ -84,7 +84,7 @@ function validarUsuario(usuario){
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			console.log(xmlhttp);
-			alert(xmlhttp.responseText);
+			console.log(xmlhttp.responseText);
 			
 			
 		}
@@ -147,7 +147,7 @@ function getStateFromUser(){
 						id = response.id;
 						
 						// Incluimos un mensaje y la imagen del usuario
-						status.innerHTML = name + " has iniciado sesión correctamente <img src='//graph.facebook.com/"+id+"/picture'>";
+						status.innerHTML ="<div><p>"+ name + " </p>"+"<img src='//graph.facebook.com/"+id+"/picture'></div>";
 					});
 			}
 			// De lo contrario lo enviamos a login.html
