@@ -1,7 +1,7 @@
 from serializers import UsuarioSerializer, ProvinciaSerializer, RubroSerializer, CiudadSerializer, EstablecimientoSerializer, CalificacionSerializer
 from models import Rubro, Provincia, Usuario, Ciudad, Establecimiento, Calificacion
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.decorators import detail_route ,api_view, list_route
+from rest_framework.decorators import detail_route ,api_view, list_route, parser_classes
 from rest_framework import generics
 
 from django.http import JsonResponse
@@ -19,6 +19,8 @@ from django.db.models import Q
 
 from rest_framework.response import Response
 from django.db.models import Count, Avg
+
+from rest_framework.parsers import JSONParser
  
 
 
@@ -31,22 +33,47 @@ class RubroViewSet(ModelViewSet):
 class UsuarioViewSet(ModelViewSet):
 	queryset	 = 	Usuario.objects.all()
 	serializer_class =	UsuarioSerializer
-	
-	#
-	@list_route(methods=['post'])
-	def register(request):
-		
-		queryset = Usuario.objects.filter(request['fb_id'])
-		
-		if queryset :
-			serializer = UsuarioSerializer(data=request.DATA)
-			if serializer.is_valid():
-				#Cargo los datos del usuario
-				serialized.save()
-				return Response(fb,serializer.data, status=status.HTTP_201_CREATED)
+"""
+@api_view(['POST'])
+@parser_classes((JSONParser,))
+def validaUsuario(request):
+	serializer = UsuarioSerializer(data=request.DATA)
+	fb = Usuario.objects.get(fb_id = serializer.data['fb_id'])
+	if some_queryset.filter(fb_id=fb.fb_id).exists():
+		print("Entry contained in queryset")
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	else:
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+"""		
+@api_view(['POST'])
+@parser_classes((JSONParser,))
+def verificaUsuario(request, format=None):
+    """
+    A view that can accept POST requests with JSON content.
+    """
+   
+    serializer = UsuarioSerializer(data=request.data,context={'request': request})
+    try:
+    	fb = Usuario.objects.get(fb_id = request.data['fb_id'])
+    	msj = {'status':'Usuario existe!'}
+    	return Response(msj)
+    except Exception, e:
+    	if serializer.is_valid():
+			serializer.save()
+
+			msj = {'status':'Usuario creado!'}
+
+			return Response(msj)
+    
+    #return Response({'received data': request.data})		
+      
+        
+        
+    
+
 			
-		else:
-			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 			
 
 
@@ -121,6 +148,7 @@ class CalificacionViewSet(ModelViewSet):
 
 
 
+<<<<<<< HEAD
 #==========Consulta si el usuario existe! si no existe lo creo ====#
 class ConsultaCreaUsuario(object):
     """
@@ -161,3 +189,5 @@ class ConsultaCreaUsuario(object):
                 # PATCH requests where the object does not exist should still
                 # return a 404 response.
                 raise
+=======
+>>>>>>> 4c37a52a2ce170b247096b4b92e3543b4bb1c607

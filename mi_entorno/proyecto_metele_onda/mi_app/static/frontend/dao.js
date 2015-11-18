@@ -11,7 +11,7 @@ function getObjetoModel(objeto, parametros, funcion){
 			funcion(resp)
 		}
 	}
-	var url = "http://localhost:8000/" + objeto + "/?format=json";
+	var url = "http://localhost:8000/" + objeto ;//+ "/?format=json";
 
 	for (var i = 0; i < parametros.length; i++) {
 		url += parametros[i]
