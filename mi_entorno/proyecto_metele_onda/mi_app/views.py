@@ -133,16 +133,16 @@ class EstablecimientoViewSet(ModelViewSet):
 @api_view(['GET'])
 def getDiezMejores(request):
 
-	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5])
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:10])
 
 	return HttpResponse(json.dumps(establecmientos))
 
 @api_view(['GET'])
 def getDiezPeores(request):
 
-	establecmientos = Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5] 
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('promedio_puntaje')[:10]) 
 
-	return HttpResponse(establecmientos)
+	return HttpResponse(json.dumps(establecmientos))
 
 
 class CalificacionViewSet(ModelViewSet):

@@ -34,5 +34,5 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^verificaUsuario/$', verificaUsuario ),
     url(r'^diezMejores/$', getDiezMejores),
-    url(r'^diezMeores/$', getDiezPeores)
+    url(r'^diezPeores/$', getDiezPeores)
 ]

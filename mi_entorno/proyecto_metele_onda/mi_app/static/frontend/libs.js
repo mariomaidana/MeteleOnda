@@ -261,23 +261,31 @@ function calificarEstablecimiento(idEstablecimiento, puntaje, comentario){
 
 function EstadisticasView(parametros){
 
-	getObjetoModel("diezMejores", parametros, EstadisticasTemplate);
-
+	getObjetoModel("diezMejores", parametros, EstadisticasMejoresTemplate);
+	getObjetoModel("diezPeores", parametros, EstadisticasPeoresTemplate);
 }
 
-function EstadisticasTemplate(estadisticas){
+function EstadisticasMejoresTemplate(estadisticas){
+	EstadisticasTemplate(estadisticas, 'diezMejores');
+}
 
-	var html, panel, nombre_elem, promedio_elem;
+function EstadisticasPeoresTemplate(estadisticas){
+	EstadisticasTemplate(estadisticas, 'diezPeores');
+}
+
+function EstadisticasTemplate(estadisticas, tipo){
+
+	var html, panel, nombre_elem, promedio_elem, rubro_elem;
 	var promedio_elem, cantCalificaciones_elem;
 	var nombre, direccion, promedio, cantCalificaciones, i, j;
 	
-	document.getElementById('diezMejores').innerHTML = '';
+	document.getElementById(tipo).innerHTML = '';
 	var html = getTemplate("templates/listadoEstadisticaEstablecimientos.html");
 	var parser = new DOMParser()
   	var listado = parser.parseFromString(html, "text/xml");
 
-	var table = document.getElementById('diezMejores');
-	table.insertRow(0).innerHTML = "<th>Prom.Puntaje</th><th>Establecimiento</th>";
+	var table = document.getElementById(tipo);
+	table.insertRow(0).innerHTML = "<th>Prom.Puntaje</th><th>Establecimiento</th><th>Rubro</th>";
 
 	for (i = 0; i < estadisticas.length; i++) {
 	
@@ -299,10 +307,15 @@ function EstadisticasTemplate(estadisticas){
 				{
 					promedio_elem = labels.item(j);
 				}
+			if (labels.item(j).id == 'rubroEstablecimiento')
+				{
+					rubro_elem = labels.item(j);
+				}
 		}
 
 		nombre_elem.textContent =  establecimiento.nombre;
 		promedio_elem.textContent =  establecimiento.promedio_puntaje;
+		rubro_elem.textContent = establecimiento.rubro.nombre;
 
 		var buttons = listado.getElementsByTagName('button');
 		
@@ -317,7 +330,11 @@ function EstadisticasTemplate(estadisticas){
 
 		var row = table.insertRow(i + 1);
 		row.innerHTML = listado.documentElement.innerHTML;
-		row.style.borderBottom = "thick dotted #CCC";
+		//row.style.borderBottom = "thick dotted #CCC";
+
+		if (i % 2 == 0){
+			row.style.backgroundColor = "#CCC";
+		}
 		
 	}
 }
