@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<script type="text/javascript" src="../libs.js"></script>
+<script type="text/javascript" src="../dao.js"></script>
+<script>
+
+function OnClick_btnGuardar(){
+
+  var establecimiento = {};
+
+  establecimiento.nombre = document.getElementById('txtNombreEstablecimiento').value;
+  establecimiento.direccion = document.getElementById('txtDireccionEstablecimiento').value;
+  establecimiento.ciudad = document.getElementById('cmbCiudad').value;
+  establecimiento.rubro = document.getElementById('cmbRubro').value;
+  establecimiento.latitud = 1;
+  establecimiento.longitud = 1;
+
+  agregarEstablecimiento(establecimiento);
+}
+
+function onLoad(){
+
+  fillComboRubros();
+  fillComboCiudades();
+
+}
+
+</script>
+
+<title>Documento sin título</title>
+</head>
+
+<body onLoad="onLoad();" >
+
+  <div style="width:400px;">
+    
+        <div id="content" style="height:100%; width:45%; padding: 10px 10px 10px 10px;">
+            
+          <div>
+              <label style="display: block;" id='nombreEstablecimiento' >Nombre</label>
+              <input style="display: block;" type="text" id="txtNombreEstablecimiento" />
+              <label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
+              <input style="display: block;" type="text" id="txtDireccionEstablecimiento" />
+              
+              <label style="display: block;" id='ciudadEstablecimiento'>Ciudad</label>
+              <select id='cmbCiudad'></select>
+              
+              <label style="display: block;" id='rubroEstablecimiento'>Rubro</label>
+              <select  id='cmbRubro'></select>
+          </div>
+          <div>
+            <table>
+              <tr>
+              <td>
+                <button id="btnGuardar" onClick="OnClick_btnGuardar();" style="width:100px;" >Guardar</button>
+                </td>
+                <td>
+                <button id='btnVolver' style="width:100px;">Cancelar</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

@@ -4,22 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-
+<script type="text/javascript" src="libs.js"></script>
+<script type="text/javascript" src="../dao.js"></script>
 <script>
-
-function OnClick_btnGuardar(){
-
-  var establecimiento = {};
-
-  establecimiento.nombre = document.getElementById('txtNombreEstablecimiento').value;
-  establecimiento.direccion = document.getElementById('txtDireccionEstablecimiento').value;
-  establecimiento.ciudad = document.getElementById('cmbCiudad').value;
-  establecimiento.rubro = document.getElementById('cmbRubro').value;
-  establecimiento.latitud = 1;
-  establecimiento.longitud = 1;
-
-  agregarEstablecimiento(establecimiento);
-}
 
 function onLoad(){
 
@@ -28,67 +15,30 @@ function onLoad(){
 
 }
 
-function fillComboRubros(){
-   var rubros = getRubros();
-   var j;
-
-    for (j = 0; j < rubros.length; j++) {
-        var x = document.getElementById("cmbRubro");
-        var option = document.createElement("option");
-        option.text = rubros[j].nombre;
-        option.value = rubros[j].id;
-        x.add(option);
-    }
-}
-
-function fillComboCiudades(){
-   var ciudades = getCiudades();
-   var j;
-
-    for (j = 0; j < ciudades.length; j++) {
-        var x = document.getElementById("cmbCiudad");
-        var option = document.createElement("option");
-        option.text = ciudades[j].nombre;
-        option.value = ciudades[j].id;
-        x.add(option);
-    }
-}
-
-
 </script>
-
-<script type="text/javascript" src="../libs.js"></script>
-<script type="text/javascript" src="../dao.js"></script>
 
 <title>Documento sin título</title>
 </head>
 
 <body onLoad="onLoad();" >
 
-<div style="width:98%;">
-
-  <div style="height:500px; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; background-color: #CCC">
-  
-      <div id="content" style="height:100%; width:45%; padding: 10px 10px 10px 10px;">
-          
-        <div>
-            <label style="display: block;" id='nombreEstablecimiento' >Nombre</label>
-            <input style="display: block;" type="text" id="txtNombreEstablecimiento" />
-            <label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
-            <input style="display: block;" type="text" id="txtDireccionEstablecimiento" />
+  <div style="width:400px;">
+    
+        <div id="content" style="height:100%; width:45%; padding: 10px 10px 10px 10px;">
             
-            <label style="display: block;" id='ciudadEstablecimiento'>Ciudad</label>
-            <select id='cmbCiudad'></select>
-            
-            <label style="display: block;" id='rubroEstablecimiento'>Rubro</label>
-            <select  id='cmbRubro'></select>
-        </div>
-        <div>
-            <button id="btnGuardar" onClick="OnClick_btnGuardar();" style="width:100px;" >Guardar</button>
-            <button id='btnVolver' style="width:100px;">Cancelar</button>
-        </div>
-    </div>
+          <div>
+              <label style="display: block;" id='nombreEstablecimiento' >Nombre</label>
+              <input style="display: block;" type="text" id="txtNombreEstablecimiento" disabled />
+              <label style="display: block;" id='direccionEstablecimiento'>Direccion</label>
+              <input style="display: block;" type="text" id="txtDireccionEstablecimiento" disabled/>
+              
+              <label style="display: block;" id='ciudadEstablecimiento'>Ciudad</label>
+              <select id='cmbCiudad' disabled></select>
+              
+              <label style="display: block;" id='rubroEstablecimiento'>Rubro</label>
+              <select  id='cmbRubro' disabled></select>
+          </div>
+      </div>
   </div>
-</div>
 </body>
 </html>

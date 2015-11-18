@@ -104,8 +104,12 @@ class EstablecimientoViewSet(ModelViewSet):
 		direccion = self.request.query_params.get('direccion', None)
 		id = self.request.query_params.get('id', None)
 		
-		if nombre is not None:
+		if nombre is not None and direccion is not None:
 			establecmientos = establecmientos.filter(Q(nombre__contains=nombre) | Q(direccion__contains=direccion))
+		elif nombre is not None:
+			establecmientos = establecmientos.filter(Q(nombre__contains=nombre))
+		elif direccion is not None:
+			establecmientos = establecmientos.filter(Q(direccion__contains=direccion))
 		
 		if id is not None:
 			establecmientos = establecmientos.filter(id=id)
@@ -129,14 +133,14 @@ class EstablecimientoViewSet(ModelViewSet):
 @api_view(['GET'])
 def getDiezMejores(request):
 
-	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('-average_rating')[:5] 
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5])
 
-	return HttpResponse(establecmientos)
+	return HttpResponse(json.dumps(establecmientos))
 
 @api_view(['GET'])
 def getDiezPeores(request):
 
-	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('average_rating')[:5] 
+	establecmientos = Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5] 
 
 	return HttpResponse(establecmientos)
 
@@ -145,49 +149,3 @@ class CalificacionViewSet(ModelViewSet):
 	queryset	 = 	Calificacion.objects.all()
 	serializer_class =	CalificacionSerializer
 
-
-
-
-<<<<<<< HEAD
-#==========Consulta si el usuario existe! si no existe lo creo ====#
-class ConsultaCreaUsuario(object):
-    """
-    The following mixin class may be used in order to support PUT-as-create
-    behavior for incoming requests.
-    """
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
-        usuario = self.get_object_or_none()
-        serializer = self.get_serializer(usuario, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-
-        if usuario is None:
-            lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
-            lookup_value = self.kwargs[lookup_url_kwarg]
-            extra_kwargs = {self.lookup_field: lookup_value}
-            serializer.save(**extra_kwargs)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        serializer.save()
-        return Response(serializer.data)
-
-    def partial_update(self, request, *args, **kwargs):
-        kwargs['partial'] = True
-        return self.update(request, *args, **kwargs)
-
-    def get_object_or_none(self):
-        try:
-            return self.get_object()
-        except Http404:
-            if self.request.method == 'PUT':
-                # For PUT-as-create operation, we need to ensure that we have
-                # relevant permissions, as if this was a POST request.  This
-                # will either raise a PermissionDenied exception, or simply
-                # return None.
-                self.check_permissions(clone_request(self.request, 'POST'))
-            else:
-                # PATCH requests where the object does not exist should still
-                # return a 404 response.
-                raise
-=======
->>>>>>> 4c37a52a2ce170b247096b4b92e3543b4bb1c607
