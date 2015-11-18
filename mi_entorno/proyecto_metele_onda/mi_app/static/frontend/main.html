@@ -31,6 +31,11 @@
       var parametros = [];
 
       EstablecimientosView(parametros);
+      EstadisticasView(parametros);
+
+
+      fillComboRubros();
+      fillComboCiudades();
     }
 
     function OnClickBuscarEstablecimientos(){
@@ -39,26 +44,36 @@
 
       var txtBuscar = document.getElementById('txtBuscar').value;
 
-      parametros.push('&nombre=' + txtBuscar);
+      parametros.push('nombre=' + txtBuscar);
       parametros.push('&direccion=' + txtBuscar);
 
       EstablecimientosView(parametros);
     }
   
-
-  
-  function OcultarPopUp(id){
-       document.getElementById(id).style.display = 'none';
-  }
   
   function OnClickBtnCrearEstablecimiento(){
-       window.location ='templates/establecimientoDetalle.html';
+       window.location ='templates/establecimientoNuevo.html';
   }
   
   function OnClickAceptarCalificar(idEstablecimiento){
   
     var comentario = document.getElementById('txtComentario').value;
-    calificarEstablecimiento(idEstablecimiento, 5, comentario);
+    var j;
+    var puntaje = 0;
+
+    var puntajes = document.getElementById('divPuntajes');
+    var buttons = puntajes.getElementsByTagName('input');
+    
+    for (j = 0; j < buttons.length; j++) {
+    
+      if (buttons.item(j).checked == true){
+      
+        puntaje = buttons.item(j).value;
+        
+      }
+    }
+
+    calificarEstablecimiento(idEstablecimiento, puntaje, comentario);
   }
     
   </script>
@@ -85,23 +100,29 @@
     <div id="status"></div>
     <button type="button" onclick="FBBtnLogout()">Cerrar sesión</button>
     <!--login cerrar-->
-
     
-
-  
       <div style="height:auto; overflow:auto; width:100%; border: solid; border-radius: 25px; padding:20px 20px 20px 20px; background-color: #CCC">
-  
+
            <div id="content" style="height:100%; width:55%; float:left; padding: 10px 10px 10px 10px;">
 
-  
-         </div>
-  
-           <div style="height:500px; width:45%; border: solid; border-radius: 25px; float:right; background-color:#FFF">
 
+         </div>
+
+           <div id="estadisticas" style="height:500px; width:45%; border: solid; border-radius: 25px; float:right; background-color:#FFF; padding: 5px 5px 5px 5px;">
+             <table id="diezMejores" style="width:100%;">
+              <tr>
+                <th>
+                  Prom.Puntaje
+                </th>
+                <th>
+                  Establecimiento
+                </th>
+              </tr>
+             </table>
            </div>
-  
+
       </div>
-  
+
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -110,11 +131,8 @@
           <h4 class="modal-title">Calificar Establecimiento</h4>
         </div>
         <div class="modal-body">
-          <p>This is a small modal.</p>
       
-      <label id="idEstablecimiento">id</label> 
-
-            <div class="btn-group" data-toggle="buttons">
+            <div class="btn-group" id="divPuntajes" data-toggle="buttons">
                 <label class="btn btn-default">
                     <input type="radio" id="q156" name="quality[25]" value="1" /> 1
                 </label> 
@@ -128,11 +146,11 @@
                     <input type="radio" id="q159" name="quality[25]" value="4" /> 4
                 </label> 
                 <label class="btn btn-default active">
-                    <input type="radio" id="q160" name="quality[25]" value="5" /> 5
+                    <input type="radio" id="q160" name="quality[25]" value="5" checked='true' /> 5
                 </label>
             </div>
       
-      <textarea id="txtComentario" class="span6" rows="3" placeholder="What's up?" required></textarea>
+      <textarea id="txtComentario" class="span6" rows="3" placeholder="Ingrese un comentario..." required></textarea>
 
         </div>
         <div class="modal-footer">
@@ -142,7 +160,28 @@
       </div>
     </div>
   </div>
-  
-</div>
+
+  <div class="modal fade" id="popUpDetalleEstablecimiento" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Establecimiento</h4>
+        </div>
+
+        <div class="modal-body" id="bodyPopUpDetalleEstablecimiento">
+      
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
   </body>
 </html>

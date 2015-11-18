@@ -84,10 +84,18 @@ class EstablecimientoViewSet(ModelViewSet):
 		
 		nombre = self.request.query_params.get('nombre', None)
 		direccion = self.request.query_params.get('direccion', None)
+		id = self.request.query_params.get('id', None)
 		
-		if nombre is not None:
+		if nombre is not None and direccion is not None:
 			establecmientos = establecmientos.filter(Q(nombre__contains=nombre) | Q(direccion__contains=direccion))
+		elif nombre is not None:
+			establecmientos = establecmientos.filter(Q(nombre__contains=nombre))
+		elif direccion is not None:
+			establecmientos = establecmientos.filter(Q(direccion__contains=direccion))
 		
+		if id is not None:
+			establecmientos = establecmientos.filter(id=id)
+
 		results = [ob.as_json() for ob in establecmientos]
 		return HttpResponse(json.dumps(results))
 	# def post(self, request):	
@@ -107,14 +115,14 @@ class EstablecimientoViewSet(ModelViewSet):
 @api_view(['GET'])
 def getDiezMejores(request):
 
-	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('-average_rating')[:5] 
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5])
 
-	return HttpResponse(establecmientos)
+	return HttpResponse(json.dumps(establecmientos))
 
 @api_view(['GET'])
 def getDiezPeores(request):
 
-	establecmientos = Calificacion.objects.values('establecimiento').annotate(average_rating=Avg('puntaje')).order_by('average_rating')[:5] 
+	establecmientos = Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:5] 
 
 	return HttpResponse(establecmientos)
 
@@ -122,7 +130,4 @@ def getDiezPeores(request):
 class CalificacionViewSet(ModelViewSet):
 	queryset	 = 	Calificacion.objects.all()
 	serializer_class =	CalificacionSerializer
-
-
-
 

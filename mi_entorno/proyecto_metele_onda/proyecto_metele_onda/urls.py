@@ -33,6 +33,6 @@ urlpatterns = [
     url(r'^',include(router.urls)),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^verificaUsuario/$', verificaUsuario ),
-    url(r'^diezmejores/$', getDiezMejores),
-    url(r'^diezpeores/$', getDiezPeores)
+    url(r'^diezMejores/$', getDiezMejores),
+    url(r'^diezMeores/$', getDiezPeores)
 ]
