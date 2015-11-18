@@ -33,20 +33,9 @@ class RubroViewSet(ModelViewSet):
 class UsuarioViewSet(ModelViewSet):
 	queryset	 = 	Usuario.objects.all()
 	serializer_class =	UsuarioSerializer
-"""
-@api_view(['POST'])
-@parser_classes((JSONParser,))
-def validaUsuario(request):
-	serializer = UsuarioSerializer(data=request.DATA)
-	fb = Usuario.objects.get(fb_id = serializer.data['fb_id'])
-	if some_queryset.filter(fb_id=fb.fb_id).exists():
-		print("Entry contained in queryset")
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-	else:
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-"""		
+
+
+#---//  Esta funcion solo valida el usuario de facebook  //------------#	
 @api_view(['POST'])
 @parser_classes((JSONParser,))
 def verificaUsuario(request, format=None):
@@ -59,21 +48,14 @@ def verificaUsuario(request, format=None):
     	fb = Usuario.objects.get(fb_id = request.data['fb_id'])
     	msj = {'status':'Usuario existe!'}
     	return Response(msj)
+
     except Exception, e:
     	if serializer.is_valid():
 			serializer.save()
 
 			msj = {'status':'Usuario creado!'}
-
 			return Response(msj)
-    
-    #return Response({'received data': request.data})		
-      
-        
-        
-    
-
-			
+ #--------------------//  fin funcion  //------------------------------#	   
 			
 
 
