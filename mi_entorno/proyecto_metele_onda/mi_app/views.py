@@ -115,14 +115,14 @@ class EstablecimientoViewSet(ModelViewSet):
 @api_view(['GET'])
 def getDiezMejores(request):
 
-	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje')[:10])
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('-promedio_puntaje'))
 
 	return HttpResponse(json.dumps(establecmientos))
 
 @api_view(['GET'])
 def getDiezPeores(request):
 
-	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('promedio_puntaje')[:10]) 
+	establecmientos = list(Calificacion.objects.values('establecimiento_id').annotate(promedio_puntaje=Avg('puntaje')).order_by('promedio_puntaje')) 
 
 	return HttpResponse(json.dumps(establecmientos))
 
@@ -131,3 +131,13 @@ class CalificacionViewSet(ModelViewSet):
 	queryset	 = 	Calificacion.objects.all()
 	serializer_class =	CalificacionSerializer
 
+	def list (self, request, format=None):
+		establecmientos = Calificacion.objects.all()
+
+		establecimiento_id = self.request.query_params.get('establecimiento_id', None)
+		
+		if establecimiento_id is not None:
+			establecmientos = establecmientos.filter(establecimiento=establecimiento_id)
+
+		results = [ob.as_json() for ob in establecmientos]
+		return HttpResponse(json.dumps(results))

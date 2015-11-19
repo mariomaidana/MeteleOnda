@@ -25,6 +25,10 @@ class Usuario(models.Model):
 	tw_id     = models.CharField(null=True, max_length = 200)
 	google_id = models.CharField(null=True, max_length = 200)
 
+	def as_json(self):
+	    return dict(
+	        id=self.id, nombre=self.nombre)
+
 	def __unicode__(self):
 		return unicode(self.fb_id)
 ##----// **fin class**  //-----------------------##

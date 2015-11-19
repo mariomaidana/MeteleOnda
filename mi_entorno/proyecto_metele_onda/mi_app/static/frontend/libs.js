@@ -161,15 +161,19 @@ function EstablecimientosTemplate(establecimientos){
 	document.getElementsByTagName('title')[0].text = "Metele Onda - Listado de establecimientos";
 };
 
+
 function OnClickBtnDetalle(idEstablecimiento){
-
-
 
 	var parametros = [];
 
 	parametros.push("id=" + idEstablecimiento);
 
 	getObjetoModel("establecimientos", parametros, EstablecimientoDetalleTemplate);
+
+	var parametrosDos = [];
+
+	parametrosDos.push("establecimiento_id=" + idEstablecimiento);
+	getObjetoModel("calificaciones", parametrosDos, EstablecimientoDetalleComentariosTemplate);
 
 }
 
@@ -213,6 +217,55 @@ function EstablecimientoDetalleTemplate(establecimientos){
 	}
 
 }
+
+function EstablecimientoDetalleComentariosTemplate(calificaciones){
+
+	document.getElementById('comentariosPopUpDetalleEstablecimiento').innerHTML = ''
+
+	var html = getTemplate("templates/establecimientoComentariosDetalle.html");
+	var parser = new DOMParser()
+  	var listado = parser.parseFromString(html, "text/xml");
+
+	var table = document.getElementById('comentariosPopUpDetalleEstablecimiento');
+	table.insertRow(0).innerHTML = "<th>Usuario</th><th>Puntaje</th><th>Comentario</th>";
+
+	for (i = 0; i < calificaciones.length; i++) {
+	
+		var calificacion = calificaciones[i];
+
+		labels = listado.getElementsByTagName('label');
+		
+		for (j = 0; j < labels.length; j++) {
+			if (labels.item(j).id == 'comentarioCalificacion')
+				{
+					comentario_elem = labels.item(j);
+				}
+				
+			if (labels.item(j).id == 'usuarioCalificacion')
+				{
+					usuario_elem = labels.item(j);
+				}
+			if (labels.item(j).id == 'puntajeCalificacion')
+				{
+					puntaje_elem = labels.item(j);
+				}
+		}
+
+		comentario_elem.textContent =  calificacion.comentario;
+		usuario_elem.textContent =  calificacion.usuario.nombre;
+		puntaje_elem.textContent =  calificacion.puntaje;
+
+		var row = table.insertRow(i + 1);
+		row.innerHTML = listado.documentElement.innerHTML;
+		//row.style.borderBottom = "thick dotted #CCC";
+
+		if (i % 2 == 0){
+			row.style.backgroundColor = "#CCC";
+		}
+		
+	}
+}
+
 
 function agregarEstablecimiento(establecimiento){
 	var xmlhttp;
@@ -287,7 +340,7 @@ function EstadisticasTemplate(estadisticas, tipo){
 	var table = document.getElementById(tipo);
 	table.insertRow(0).innerHTML = "<th>Prom.Puntaje</th><th>Establecimiento</th><th>Rubro</th>";
 
-	for (i = 0; i < estadisticas.length; i++) {
+	for (i = 0; (i < estadisticas.length & i < 10); i++) {
 	
 		var e  = getEstablecimiento(estadisticas[i].establecimiento_id);
 

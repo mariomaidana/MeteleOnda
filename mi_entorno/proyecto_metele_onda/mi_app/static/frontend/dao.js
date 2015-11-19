@@ -21,7 +21,7 @@ function getObjetoModel(objeto, parametros, funcion){
 		url += parametros[i]
 	};
 
-	xmlhttp.open("GET", url, false);
+	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
 };
 
